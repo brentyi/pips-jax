@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pips_jax"
+description = "JAX port of PIPs"
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "jax",
+    "jaxlib",
+    "jaxtyping",
+    "jax_dataclasses",
+    "flax",
+    "einops",
+     # Dependencies below are just for example scripts.
+    "imageio",
+    "tyro",
+    "opencv-python",
+]
+dynamic = ["version"]
+
+[tool.isort]
+profile = "black"
+
+[tool.mypy]
+python_version = "3.8"
+ignore_missing_imports = true
+warn_unused_configs = true
+
+[tool.pyright]
+exclude = [
+    "**/__pycache__",
+]
+
+reportMissingImports = true
+reportMissingTypeStubs = false
+
+pythonVersion = "3.8"
