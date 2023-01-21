@@ -53,7 +53,11 @@ Runnable scripts:
   ```
   JAX (0.4.1, jitted):
     0.10610 ± 0.00165 seconds
+  ```
 
+  Results using the stock PyTorch model:
+
+  ```
   PyTorch (1.13, with torch.inference_mode):
     0.17770 ± 0.01157 seconds
 
@@ -62,6 +66,20 @@ Runnable scripts:
 
   PyTorch (2.0.0.dev20230121, with torch.compile):
     0.12979 ± 0.00074 seconds
+  ```
+
+  Results on the PyTorch model with `fcp` logic commented out (this is only used
+  for training, and would be stripped out by JIT compilation in JAX):
+
+  ```
+  PyTorch (1.13, with torch.inference_mode):
+    0.15659 ± 0.02398 seconds
+
+  PyTorch (2.0.0.dev20230121, with torch.inference_mode):
+    0.15634 ± 0.02388 seconds
+
+  PyTorch (2.0.0.dev20230121, with torch.compile):
+    0.11968 ± 0.00146 seconds
   ```
 
   For generating PyTorch timings, see
