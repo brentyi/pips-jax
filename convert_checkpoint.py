@@ -1,5 +1,5 @@
-import pathlib
 import re
+from pathlib import Path
 from typing import Mapping, Tuple, cast
 
 import flax
@@ -13,12 +13,8 @@ from pips_jax.model import Pips
 
 
 def main(
-    torch_checkpoint_path: pathlib.Path = pathlib.Path(
-        "./torch_reference_model/model-000200000.pth"
-    ),
-    jax_checkpoint_path: pathlib.Path = pathlib.Path(
-        "./checkpoints/reference_model/checkpoint_200000"
-    ),
+    torch_checkpoint_path: Path = Path("./torch_reference_model/model-000200000.pth"),
+    jax_checkpoint_path: Path = Path("./checkpoints/reference_model/checkpoint_200000"),
     overwrite: bool = False,
 ) -> None:
     """Load a PyTorch PIPs checkpoint and convert it to a checkpoint for use in JAX."""
