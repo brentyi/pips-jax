@@ -1,3 +1,5 @@
+"""Load a PyTorch PIPs checkpoint and convert it to a checkpoint for use in JAX."""
+
 import re
 from pathlib import Path
 from typing import Mapping, Tuple, cast
@@ -17,8 +19,6 @@ def main(
     jax_checkpoint_path: Path = Path("./checkpoints/reference_model/checkpoint_200000"),
     overwrite: bool = False,
 ) -> None:
-    """Load a PyTorch PIPs checkpoint and convert it to a checkpoint for use in JAX."""
-
     # Load PyTorch parameters as numpy arrays.
     assert torch_checkpoint_path.exists()
     torch_state = torch.load(torch_checkpoint_path, map_location=torch.device("cpu"))
@@ -76,4 +76,4 @@ def main(
 
 
 if __name__ == "__main__":
-    tyro.cli(main)
+    tyro.cli(main, description=__doc__)

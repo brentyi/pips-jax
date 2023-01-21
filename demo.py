@@ -1,3 +1,6 @@
+"""Load a set of images, track n points on subsequences of them, and save visualizations
+as gifs."""
+
 from pathlib import Path
 
 import cv2
@@ -19,9 +22,6 @@ def main(
     gif_out_dir: Path = Path("./demo_out"),
     sqrt_n: int = 16,
 ) -> None:
-    """Load a set of images, track n points on subsequences of them, and save
-    visualizations as gifs."""
-
     # Initialize model, load params from reference checkpoint.
     print("Initializing model...")
     model = Pips(stride=4)
@@ -119,4 +119,4 @@ def main(
 
 
 if __name__ == "__main__":
-    tyro.cli(main)
+    tyro.cli(main, description=__doc__)

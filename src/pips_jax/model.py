@@ -74,12 +74,15 @@ class Pips(nn.Module):
                 exact_gelu,
             ]
         )
+
+        # This is a GroupNorm with 1 group in the original code.
         torch_eps = 1e-5
-        self.norm = nn.LayerNorm(  # This is a GroupNorm with 1 group in the original code.
+        self.norm = nn.LayerNorm(
             epsilon=torch_eps,
             reduction_axes=(-1,),
             name="norm",  # type: ignore
         )
+
         self.vis_predictor = nn.Sequential(
             [
                 nn.Dense(
