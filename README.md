@@ -51,12 +51,21 @@ Runnable scripts:
   pass. Results on a single forward pass[^1]:
 
   ```
-  JAX (jitted):
+  JAX (0.4.1, jitted):
     0.10610 ± 0.00165 seconds
 
-  PyTorch (with torch.inference_mode):
+  PyTorch (1.13, with torch.inference_mode):
     0.17770 ± 0.01157 seconds
+
+  PyTorch (2.0.0.dev20230121, with torch.inference_mode):
+    0.19143 ± 0.02434 seconds
+
+  PyTorch (2.0.0.dev20230121, with torch.compile):
+    0.12979 ± 0.00074 seconds
   ```
+
+  For generating PyTorch timings, see
+  [this script](https://github.com/brentyi/pips/blob/main/benchmark.py).
 
 [^1]:
     Run on an RTX 2080 TI. 8 image subsequence, 640x360, 256 points, stride=4,
