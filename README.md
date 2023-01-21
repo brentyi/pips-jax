@@ -20,7 +20,7 @@ We currently include:
 
 ### Setup
 
-Clone and install:
+Clone and install (you may want to [install JAX with GPU support](https://github.com/google/jax#pip-installation-gpu-cuda) first]):
 
 ```
 git clone https://github.com/brentyi/pips-jax.git
