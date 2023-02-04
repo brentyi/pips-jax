@@ -1,9 +1,9 @@
 """Utilities for bilinear interpolation."""
 
-
 from typing import Tuple, Union
 
 import jax
+import jax.core
 import jax.image
 import jax.scipy.ndimage
 from jax import numpy as jnp

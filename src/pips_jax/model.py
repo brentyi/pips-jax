@@ -83,13 +83,9 @@ class Pips(nn.Module):
             name="norm",  # type: ignore
         )
 
-        self.vis_predictor = nn.Sequential(
-            [
-                nn.Dense(
-                    features=1,
-                    name="vis_predictor.0",  # type: ignore
-                )
-            ]
+        self.vis_predictor = nn.Dense(
+            features=1,
+            name="vis_predictor.0",  # type: ignore
         )
 
     def __call__(
@@ -324,9 +320,6 @@ class BasicEncoder(nn.Module):
             name="conv3",  # type: ignore
         )(x)
         assert x.shape == (b, s, h // self.stride, w // self.stride, self.output_dim)
-
-        # 1/11/2022: verified that everything up until here matches torch
-        # implementation!
         return x
 
     def _make_layer(self, planes: int, stride: int, name: str) -> nn.Sequential:
@@ -452,7 +445,6 @@ class MLPMixer(nn.Module):
         torch_eps = 1e-5
 
         for i in range(self.depth):
-
             # Token mixing with prenorm residual.
             skip = x
             x = nn.LayerNorm(

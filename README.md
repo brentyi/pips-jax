@@ -48,12 +48,12 @@ Runnable scripts:
   ![demo_image_000](./demo_out/demo_000.gif)
 
 - `python benchmark.py --help`: Benchmarking script for the JAX model's forward
-  pass. Results on a single forward pass[^1] compared to PyTorch:
+  pass. Runtimes in seconds for a single forward pass[^1] compared to PyTorch:
 
-  |                 | **JAX 0.4.1** | **PyTorch 1.13**                  | **PyTorch 2.0**                   | **PyTorch 2.0 + `torch.compile()`**       |
-  | --------------- | ------------- | --------------------------------- | --------------------------------- | ----------------------------------------- |
-  | **RTX 4090**    | 0.03111±0.00  | 0.09892±0.02061<br />0.07652±0.02 | 0.09922±0.02065<br />0.08653±0.03 | (probably fast but ran into CUDA errors!) |
-  | **RTX 2080 TI** | 0.10610±0.00  | 0.17770±0.01157<br />0.15659±0.02 | 0.19143±0.02434<br />0.15634±0.02 | 0.12979±0.00<br />0.11968±0.00            |
+  |                 | **JAX 0.4.1** | **PyTorch 1.13**               | **PyTorch 2.0**                | **PyTorch 2.0 + `torch.compile()`**       |
+  | --------------- | ------------- | ------------------------------ | ------------------------------ | ----------------------------------------- |
+  | **RTX 4090**    | 0.03111±0.00  | 0.09892±0.02<br />0.07652±0.02 | 0.09922±0.02<br />0.08653±0.03 | (probably fast but ran into CUDA errors!) |
+  | **RTX 2080 TI** | 0.10610±0.00  | 0.17770±0.01<br />0.15659±0.02 | 0.19143±0.02<br />0.15634±0.02 | 0.12979±0.00<br />0.11968±0.00            |
 
   For generating PyTorch timings, see
   [this script](https://github.com/brentyi/pips/blob/main/benchmark.py). Note
