@@ -13,7 +13,7 @@ dependencies = [
     "jaxtyping",
     "jax_dataclasses",
     "flax",
-    "einops",
+    "einops>=0.6.0",
      # Dependencies below are just for example scripts.
     "imageio",
     "tyro",

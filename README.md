@@ -48,51 +48,17 @@ Runnable scripts:
   ![demo_image_000](./demo_out/demo_000.gif)
 
 - `python benchmark.py --help`: Benchmarking script for the JAX model's forward
-  pass. Results on a single forward pass[^1]:
+  pass. Results on a single forward pass[^1] compared to PyTorch:
 
-  ```
-  JAX (0.4.1, jitted):
-    0.10610 ± 0.00165 seconds
-  ```
-
-  Results using the stock PyTorch model:
-
-  ```
-  PyTorch (1.13, with torch.inference_mode):
-    0.17770 ± 0.01157 seconds
-
-  PyTorch (2.0.0.dev20230121, with torch.inference_mode):
-    0.19143 ± 0.02434 seconds
-
-  PyTorch (2.0.0.dev20230121, with torch.compile):
-    0.12979 ± 0.00074 seconds
-  ```
-
-  Results on the PyTorch model with `fcp` logic commented out (this is only used
-  for training, and would be stripped out by JIT compilation in JAX):
-
-  ```
-  PyTorch (1.13, with torch.inference_mode):
-    0.15659 ± 0.02398 seconds
-
-  PyTorch (2.0.0.dev20230121, with torch.inference_mode):
-    0.15634 ± 0.02388 seconds
-
-  PyTorch (2.0.0.dev20230121, with torch.compile):
-    0.11968 ± 0.00146 seconds
-  ```
+  |                 | **JAX 0.4.1** | **PyTorch 1.13**                  | **PyTorch 2.0**                   | **PyTorch 2.0 + `torch.compile()`**       |
+  | --------------- | ------------- | --------------------------------- | --------------------------------- | ----------------------------------------- |
+  | **RTX 4090**    | 0.03111±0.00  | 0.09892±0.02061<br />0.07652±0.02 | 0.09922±0.02065<br />0.08653±0.03 | (probably fast but ran into CUDA errors!) |
+  | **RTX 2080 TI** | 0.10610±0.00  | 0.17770±0.01157<br />0.15659±0.02 | 0.19143±0.02434<br />0.15634±0.02 | 0.12979±0.00<br />0.11968±0.00            |
 
   For generating PyTorch timings, see
-  [this script](https://github.com/brentyi/pips/blob/main/benchmark.py).
+  [this script](https://github.com/brentyi/pips/blob/main/benchmark.py). Note
+  that each PyTorch cell has two timings: the first is the PIPs code as
+  released, and the second is the PIPs code with logic corresponding to `fcp`
+  commented out. This is only used for training and visualization.
 
-[^1]:
-    Run on an RTX 2080 TI. 8 image subsequence, 640x360, 256 points, stride=4,
-    iters=6.
-
-### Progress
-
-- [x] Check model outputs against torch
-- [x] Checkpoint translation
-- [x] Reproduce demo script
-- [x] Benchmark
-- [ ] Double-check install from scratch
+[^1]: 8 image subsequence, 640x360, 256 points, stride=4, iters=6.
